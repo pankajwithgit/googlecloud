@@ -1,0 +1,7 @@
+imports:
+- path: gcs.jinja
+
+resources:
+- name: gcs
+  type: gcs.jinja
+
