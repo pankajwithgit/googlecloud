@@ -1,4 +1,4 @@
-{% set VM_NAME = env['project'] + '-' + env['name'] %}
+{% set VM_NAME = env['project'] + '-vm' %}
 
 resources:
 - type: compute.v1.instance
@@ -6,6 +6,10 @@ resources:
   properties:
     zone: us-central1-f
     machineType: https://www.googleapis.com/compute/v1/projects/{{ env['project'] }}/zones/us-central1-f/machineTypes/n1-standard-1
+    serviceAccounts:
+    - email: {{ env['project_number'] }}-compute@developer.gserviceaccount.com
+      scopes:
+       - https://www.googleapis.com/auth/cloud-platform
     disks:
     - deviceName: boot
       type: PERSISTENT
@@ -19,4 +23,5 @@ resources:
       accessConfigs:
       - name: External NAT
         type: ONE_TO_ONE_NAT
+
 
