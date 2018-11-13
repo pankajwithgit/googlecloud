@@ -1,0 +1,16 @@
+{% set TOPIC_NAME = 'my-topic' %}
+{% set SUBSCRIPTION_NAME = 'my-sub' %}
+
+resources:
+# Create Topic
+- name: {{ TOPIC_NAME }}
+  type: gcp-types/pubsub-v1:projects.topics
+  properties:
+    topic: {{ TOPIC_NAME }}
+
+# Create Subscription
+- name: {{ SUBSCRIPTION_NAME }}
+  type: gcp-types/pubsub-v1:projects.subscriptions
+  properties:
+    subscription: {{ SUBSCRIPTION_NAME }}
+    topic: $(ref.{{ TOPIC_NAME }}.name)

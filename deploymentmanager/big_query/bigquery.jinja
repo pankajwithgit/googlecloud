@@ -1,0 +1,23 @@
+# Can't use deployment name as it is going to be filled in with a generated
+# name which has dashes in it, which are not valid bigquery name characters.
+{% set DATASET_NAME = (env['project'] + "-dataset")|replace("-","_") %}
+{% set EMPLOYEE_TABLE_NAME = "employee" %}
+
+
+resources:
+# Dataset Resource
+- name: {{ DATASET_NAME }}
+  type: gcp-types/bigquery-v2:datasets
+  properties:
+    datasetReference:
+      datasetId: {{ DATASET_NAME }}
+      description: The {{ DATASET_NAME }} dataset contains all the tables for employees.
+      location: US
+
+# Employee Table
+- name: {{ EMPLOYEE_TABLE_NAME }}
+  type: gcp-types/bigquery-v2:tables
+  properties:
+    datasetId: $(ref.{{ DATASET_NAME }}.datasetReference.datasetId)
+    tableReference:
+      tableId: {{ EMPLOYEE_TABLE_NAME }}

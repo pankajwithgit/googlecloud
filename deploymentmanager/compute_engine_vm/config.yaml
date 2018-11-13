@@ -1,0 +1,7 @@
+imports:
+- path: vm.jinja
+
+resources:
+- name: vm
+  type: vm.jinja
+

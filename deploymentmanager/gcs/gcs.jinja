@@ -1,0 +1,10 @@
+{% set BUCKET_NAME = env['project'] + '-resources' %}
+
+resources:
+- type: gcp-types/storage-v1:buckets
+  name: {{ BUCKET_NAME }}
+  properties:
+    predefinedAcl: projectPrivate
+    projection: full
+    location: US
+    storageClass: STANDARD
