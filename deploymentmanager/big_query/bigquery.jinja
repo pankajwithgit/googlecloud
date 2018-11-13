@@ -21,3 +21,17 @@ resources:
     datasetId: $(ref.{{ DATASET_NAME }}.datasetReference.datasetId)
     tableReference:
       tableId: {{ EMPLOYEE_TABLE_NAME }}
+    schema:
+          fields:
+          - name: emp_id
+            type: string
+            mode: REQUIRED
+          - name: emp_name
+            type: string
+            mode: REQUIRED
+          - name: emp_type
+            type: string
+            mode: REQUIRED
+          - name: depart_name
+            type: string
+            mode: REQUIRED
